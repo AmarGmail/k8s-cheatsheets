@@ -229,19 +229,32 @@
     "ReplicationController": { desc: "Older version of ReplicaSet. Rarely used today.", rel: "Superseded by &rarr; ReplicaSet." }
   };
 
-  document.querySelectorAll(".k8s-obj").forEach(function(el) {
-    el.addEventListener("click", function() {
-      document.querySelectorAll(".k8s-obj").forEach(function(e) { e.classList.remove("active"); });
-      this.classList.add("active");
-      var name = this.getAttribute("data-obj");
-      var info = objects[name];
-      if (!info) {
-        panel.innerHTML = "<h3>" + name + "</h3><p style="color:#999">No description found for this object.</p>";
-        return;
-      }
-      panel.innerHTML = "<h3>" + name + "</h3><p>" + info.desc + "</p>" + (info.rel ? "<div class="rel">&rarr; " + info.rel + "</div>" : "");
+  document.querySelectorAll(".k8s-obj").forEach((el) => {
+  el.addEventListener("click", () => {
+    document.querySelectorAll(".k8s-obj").forEach((e) => {
+      e.classList.remove("active");
     });
+
+    el.classList.add("active");
+
+    const name = el.dataset.obj;
+    const info = objects[name];
+
+    if (!info) {
+      panel.innerHTML = `
+        <h3>${name}</h3>
+        <p style="color:#999">No description found for this object.</p>
+      `;
+      return;
+    }
+
+    panel.innerHTML = `
+      <h3>${name}</h3>
+      <p>${info.desc}</p>
+      ${info.rel ? `<div class="rel">&rarr; ${info.rel}</div>` : ""}
+    `;
   });
+});
 })();
 </script>
 
