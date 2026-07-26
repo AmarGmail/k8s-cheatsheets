@@ -68,7 +68,7 @@
 </head>
 <body>
 
-<h1>🔧 Kubernetes Object Relationship Map</h1>
+<h1>Kubernetes Object Relationship Map</h1>
 
 <div class="legend">
   <div class="legend-item"><div class="legend-dot" style="background:#326ce5"></div>Workloads</div>
@@ -101,7 +101,7 @@
 <!-- LAYER 2: Workloads -->
 <div class="k8s-row">
   <div class="k8s-layer">
-    <h4>Workloads — What Runs</h4>
+    <h4>Workloads &mdash; What Runs</h4>
     <span class="k8s-obj workload" data-obj="Deployment">Deployment</span>
     <span class="k8s-obj workload" data-obj="StatefulSet">StatefulSet</span>
     <span class="k8s-obj workload" data-obj="DaemonSet">DaemonSet</span>
@@ -110,13 +110,13 @@
   </div>
   <div class="arrow-col"><span class="arrow-label">creates</span><div class="arrow-line"></div><div class="arrow-head"></div></div>
   <div class="k8s-layer">
-    <h4>Controllers — What Enforces</h4>
+    <h4>Controllers &mdash; What Enforces</h4>
     <span class="k8s-obj workload" data-obj="ReplicaSet">ReplicaSet</span>
     <span class="k8s-obj workload" data-obj="ReplicationController">ReplicationController</span>
   </div>
   <div class="arrow-col"><span class="arrow-label">creates</span><div class="arrow-line"></div><div class="arrow-head"></div></div>
   <div class="k8s-layer">
-    <h4>Runtime — What Actually Runs</h4>
+    <h4>Runtime &mdash; What Actually Runs</h4>
     <span class="k8s-obj workload" data-obj="Pod">Pod</span>
     <span class="k8s-obj workload" data-obj="Container">Container</span>
   </div>
@@ -125,14 +125,14 @@
 <!-- LAYER 3: Supporting objects -->
 <div class="k8s-row">
   <div class="k8s-layer">
-    <h4>Configuration — What Pods Consume</h4>
+    <h4>Configuration &mdash; What Pods Consume</h4>
     <span class="k8s-obj config" data-obj="ConfigMap">ConfigMap</span>
     <span class="k8s-obj config" data-obj="Secret">Secret</span>
     <span class="k8s-obj config" data-obj="ServiceAccount">ServiceAccount</span>
   </div>
   <div class="arrow-col"><span class="arrow-label">mounts into</span><div class="arrow-line"></div><div class="arrow-head"></div></div>
   <div class="k8s-layer">
-    <h4>Networking — How Pods Talk</h4>
+    <h4>Networking &mdash; How Pods Talk</h4>
     <span class="k8s-obj network" data-obj="Service (ClusterIP)">Service (ClusterIP)</span>
     <span class="k8s-obj network" data-obj="Service (NodePort)">Service (NodePort)</span>
     <span class="k8s-obj network" data-obj="Service (LoadBalancer)">Service (LoadBalancer)</span>
@@ -141,9 +141,9 @@
   </div>
   <div class="arrow-col"><span class="arrow-label">routes to</span><div class="arrow-line"></div><div class="arrow-head"></div></div>
   <div class="k8s-layer">
-    <h4>Storage — What Pods Persist</h4>
-    <span class="k8s-obj storage" data-obj="PersistentVolume (PV)">PersistentVolume</span>
-    <span class="k8s-obj storage" data-obj="PersistentVolumeClaim (PVC)">PersistentVolumeClaim</span>
+    <h4>Storage &mdash; What Pods Persist</h4>
+    <span class="k8s-obj storage" data-obj="PersistentVolume (PV)">PersistentVolume (PV)</span>
+    <span class="k8s-obj storage" data-obj="PersistentVolumeClaim (PVC)">PersistentVolumeClaim (PVC)</span>
     <span class="k8s-obj storage" data-obj="StorageClass">StorageClass</span>
   </div>
 </div>
@@ -151,7 +151,7 @@
 <!-- LAYER 4: RBAC and Autoscaling -->
 <div class="k8s-row">
   <div class="k8s-layer">
-    <h4>RBAC — Who Can Do What</h4>
+    <h4>RBAC &mdash; Who Can Do What</h4>
     <span class="k8s-obj rbac" data-obj="Role">Role</span>
     <span class="k8s-obj rbac" data-obj="ClusterRole">ClusterRole</span>
     <span class="k8s-obj rbac" data-obj="RoleBinding">RoleBinding</span>
@@ -159,7 +159,7 @@
   </div>
   <div class="arrow-col"><span class="arrow-label">grants</span><div class="arrow-line"></div><div class="arrow-head"></div></div>
   <div class="k8s-layer">
-    <h4>Autoscaling — Dynamic Sizing</h4>
+    <h4>Autoscaling &mdash; Dynamic Sizing</h4>
     <span class="k8s-obj workload" data-obj="HPA">HPA</span>
     <span class="k8s-obj workload" data-obj="VPA">VPA</span>
     <span class="k8s-obj workload" data-obj="PDB">PodDisruptionBudget</span>
@@ -179,54 +179,54 @@
   <h3>Click any object above</h3>
   <p>See what it does and how it connects to other objects.</p>
 </div>
-<div class="hint">💡 The golden rule: <strong>Deployment → ReplicaSet → Pod → Container</strong>. Everything else supports this chain.</div>
+<div class="hint">The golden rule: <strong>Deployment &rarr; ReplicaSet &rarr; Pod &rarr; Container</strong>. Everything else supports this chain.</div>
 
-<div class="footer">Kubernetes Object Map — Open this file in any browser</div>
+<div class="footer">Kubernetes Object Map &mdash; Open this file in any browser</div>
 
 <script>
 (function(){
-  const panel = document.getElementById("detail-panel");
-  const objects = {
-    "Deployment": { desc: "YOU create this. Declares desired state: I want 3 replicas of my app. Creates ReplicaSets automatically.", rel: "Creates → ReplicaSet. You write this in YAML." },
-    "ReplicaSet": { desc: "Created by Deployment. Ensures the EXACT number of pods are running. If a pod dies, it creates a replacement.", rel: "Created by → Deployment. Creates → Pod." },
-    "Pod": { desc: "The smallest deployable unit. 1+ containers that share network and storage. Ephemeral — can be killed and recreated.", rel: "Created by → ReplicaSet or DaemonSet. Consumes → ConfigMap, Secret, PVC. Talks via → Service." },
-    "Container": { desc: "Your actual app (nginx, echoserver, etc.). Lives inside a Pod.", rel: "Lives inside → Pod." },
-    "Service (ClusterIP)": { desc: "Internal load balancer. Gives pods a stable IP and DNS name. Only reachable from inside the cluster.", rel: "Routes traffic → Pods (via label selector). Used by → frontend calling backend-service." },
-    "Service (NodePort)": { desc: "Exposes a Service on each node's IP at a static port (e.g., :30080). Accessible from outside.", rel: "Exposes → Service. Accessible from → outside cluster via $(minikube ip):30080." },
-    "Service (LoadBalancer)": { desc: "Cloud-only. Provisions a cloud load balancer (AWS ELB, GCP LB) pointing to your Service.", rel: "Exposes → Service to internet. Cloud provider creates → external LB." },
-    "ConfigMap": { desc: "Key-value store for non-secret config (HTML files, nginx.conf, env vars). Injected into pods as files or env vars.", rel: "Mounted into → Pod as volume or env var." },
-    "Secret": { desc: "Like ConfigMap but for sensitive data (passwords, tokens). Base64 encoded (not encrypted by default).", rel: "Mounted into → Pod. Should be used for → DB passwords, API keys." },
-    "PersistentVolumeClaim": { desc: "A request for storage. I need 10GB. Binds to an available PV. Namespace-scoped.", rel: "Requested by → Pod. Binds to → PersistentVolume." },
-    "PersistentVolume": { desc: "Actual storage resource (NFS, cloud disk, local path). Cluster-scoped. Created by admin or provisioner.", rel: "Bound by → PVC. Mounted into → Pod." },
-    "HPA": { desc: "Horizontal Pod Autoscaler. Scales Deployment replicas up/down based on CPU/memory usage. Needs metrics-server.", rel: "Watches → Deployment. Scales → ReplicaSet → Pod count." },
-    "ServiceAccount": { desc: "Identity for a pod. Who is this pod? Used by RBAC to decide what the pod can do.", rel: "Assigned to → Pod. Bound by → RoleBinding to a Role." },
-    "Role": { desc: "Permissions within ONE namespace. Can create pods in the shopping namespace.", rel: "Bound to → ServiceAccount via RoleBinding." },
-    "RoleBinding": { desc: "Links a Role to a user or ServiceAccount. Give the frontend ServiceAccount the Role pod-reader.", rel: "Connects → Role + ServiceAccount." },
-    "DaemonSet": { desc: "Ensures 1 pod runs on EVERY node. Used for logging, monitoring, kube-proxy.", rel: "Creates → Pod directly (no ReplicaSet). Runs on → All nodes." },
-    "StatefulSet": { desc: "Like Deployment but for stateful apps (databases). Pods get stable names and persistent storage.", rel: "Creates → Pod with ordered names (db-0, db-1). Uses → PVC per pod." },
-    "Ingress": { desc: "HTTP/HTTPS router. Routes example.com/api to one Service, example.com/blog to another. Needs an Ingress Controller.", rel: "Routes external HTTP → Services." },
-    "Node": { desc: "A worker machine (VM or physical) that runs pods. Minikube has 1 node. Real clusters have many.", rel: "Runs → Pods. Managed by → Kubelet." },
-    "Namespace": { desc: "A virtual cluster inside your cluster. Isolates resources. Default ones: default, kube-system.", rel: "Contains → almost all objects (except cluster-scoped like Node, PV, ClusterRole)." },
-    "API Server": { desc: "The front door. Every kubectl command talks to this. Validates and processes requests.", rel: "Serves → All kubectl and internal requests. Stores state in → etcd." },
-    "etcd": { desc: "The cluster database. Stores ALL cluster state (what pods exist, where they run, configs).", rel: "Backed by → API Server. Heart of the cluster." },
-    "Scheduler": { desc: "Decides WHICH node a new pod should run on based on resources and rules.", rel: "Reads unscheduled pods from → API Server. Assigns to → Node." },
-    "Controller Mgr": { desc: "Watches the cluster and fixes drift. If a Deployment says 3 replicas but only 2 exist, it creates the 3rd.", rel: "Runs controllers for → Deployment, ReplicaSet, Node, Endpoint, etc." },
-    "Kubelet": { desc: "The node agent. Runs on every node. Talks to API server and starts/stops containers.", rel: "Runs on → Node. Manages → Pods via container runtime." },
-    "Kube-proxy": { desc: "Network proxy on every node. Manages iptables rules so Services can route traffic to pods.", rel: "Runs on → Every node. Implements → Service networking." },
-    "StorageClass": { desc: "Template for creating PVs dynamically. When someone asks for fast-ssd, create an AWS gp3 volume.", rel: "Referenced by → PVC. Creates → PersistentVolume." },
-    "NetworkPolicy": { desc: "Firewall rules for pods. Only allow frontend pods to talk to backend pods on port 8080.", rel: "Applied to → Pods by label selector." },
-    "Job": { desc: "Runs a pod to completion (then stops). For one-off tasks like backups or migrations.", rel: "Creates → Pod. Restarts → Never (unlike Deployment)." },
-    "CronJob": { desc: "Runs Jobs on a schedule. Like Linux crontab but for containers.", rel: "Creates → Job → Pod on schedule." },
-    "ClusterRole": { desc: "Permissions across the ENTIRE cluster. Can list all nodes in any namespace.", rel: "Bound by → ClusterRoleBinding. Scope: cluster-wide." },
-    "ClusterRoleBinding": { desc: "Like RoleBinding but for ClusterRoles. Cluster-scoped.", rel: "Connects → ClusterRole + user/ServiceAccount." },
-    "PDB": { desc: "Pod Disruption Budget. Ensure at least 2 pods are always available during node maintenance or upgrades.", rel: "Protects → Pods of a Deployment/ReplicaSet." },
-    "VPA": { desc: "Vertical Pod Autoscaler. Adjusts CPU/memory LIMITS of existing pods (restarts them).", rel: "Modifies → Pod resource limits." },
-    "NodeSelector": { desc: "Simple rule: Only run this pod on nodes with label disk=ssd.", rel: "Used by → Pod spec. Matches → Node labels." },
-    "Affinity": { desc: "Advanced scheduling. Prefer nodes near the database or Spread pods across zones.", rel: "Used by → Pod spec. Guides → Scheduler." },
-    "Taint/Toleration": { desc: "Node says Do not schedule here unless pod tolerates my taint. Used for dedicated nodes.", rel: "Taint on → Node. Toleration on → Pod." },
-    "ResourceQuota": { desc: "Namespace limit. This namespace can use max 10 CPUs and 20GB RAM total.", rel: "Applied to → Namespace. Enforced by → API Server." },
-    "LimitRange": { desc: "Default resource limits for new pods in a namespace. If no limit specified, default to 512MB RAM.", rel: "Applied to → Namespace. Affects → new Pods." },
-    "ReplicationController": { desc: "Older version of ReplicaSet. Rarely used today.", rel: "Superseded by → ReplicaSet." }
+  var panel = document.getElementById("detail-panel");
+  var objects = {
+    "Deployment": { desc: "YOU create this. Declares desired state: I want 3 replicas of my app. Creates ReplicaSets automatically.", rel: "Creates &rarr; ReplicaSet. You write this in YAML." },
+    "ReplicaSet": { desc: "Created by Deployment. Ensures the EXACT number of pods are running. If a pod dies, it creates a replacement.", rel: "Created by &rarr; Deployment. Creates &rarr; Pod." },
+    "Pod": { desc: "The smallest deployable unit. 1+ containers that share network and storage. Ephemeral &mdash; can be killed and recreated.", rel: "Created by &rarr; ReplicaSet or DaemonSet. Consumes &rarr; ConfigMap, Secret, PVC. Talks via &rarr; Service." },
+    "Container": { desc: "Your actual app (nginx, echoserver, etc.). Lives inside a Pod.", rel: "Lives inside &rarr; Pod." },
+    "Service (ClusterIP)": { desc: "Internal load balancer. Gives pods a stable IP and DNS name. Only reachable from inside the cluster.", rel: "Routes traffic &rarr; Pods (via label selector). Used by &rarr; frontend calling backend-service." },
+    "Service (NodePort)": { desc: "Exposes a Service on each node's IP at a static port (e.g., :30080). Accessible from outside.", rel: "Exposes &rarr; Service. Accessible from &rarr; outside cluster via $(minikube ip):30080." },
+    "Service (LoadBalancer)": { desc: "Cloud-only. Provisions a cloud load balancer (AWS ELB, GCP LB) pointing to your Service.", rel: "Exposes &rarr; Service to internet. Cloud provider creates &rarr; external LB." },
+    "ConfigMap": { desc: "Key-value store for non-secret config (HTML files, nginx.conf, env vars). Injected into pods as files or env vars.", rel: "Mounted into &rarr; Pod as volume or env var." },
+    "Secret": { desc: "Like ConfigMap but for sensitive data (passwords, tokens). Base64 encoded (not encrypted by default).", rel: "Mounted into &rarr; Pod. Should be used for &rarr; DB passwords, API keys." },
+    "PersistentVolumeClaim (PVC)": { desc: "A request for storage. I need 10GB. Binds to an available PV. Namespace-scoped.", rel: "Requested by &rarr; Pod. Binds to &rarr; PersistentVolume (PV)." },
+    "PersistentVolume (PV)": { desc: "Actual storage resource (NFS, cloud disk, local path). Cluster-scoped. Created by admin or provisioner.", rel: "Bound by &rarr; PVC. Mounted into &rarr; Pod." },
+    "HPA": { desc: "Horizontal Pod Autoscaler. Scales Deployment replicas up/down based on CPU/memory usage. Needs metrics-server.", rel: "Watches &rarr; Deployment. Scales &rarr; ReplicaSet &rarr; Pod count." },
+    "ServiceAccount": { desc: "Identity for a pod. Who is this pod? Used by RBAC to decide what the pod can do.", rel: "Assigned to &rarr; Pod. Bound by &rarr; RoleBinding to a Role." },
+    "Role": { desc: "Permissions within ONE namespace. Can create pods in the shopping namespace.", rel: "Bound to &rarr; ServiceAccount via RoleBinding." },
+    "RoleBinding": { desc: "Links a Role to a user or ServiceAccount. Give the frontend ServiceAccount the Role pod-reader.", rel: "Connects &rarr; Role + ServiceAccount." },
+    "DaemonSet": { desc: "Ensures 1 pod runs on EVERY node. Used for logging, monitoring, kube-proxy.", rel: "Creates &rarr; Pod directly (no ReplicaSet). Runs on &rarr; All nodes." },
+    "StatefulSet": { desc: "Like Deployment but for stateful apps (databases). Pods get stable names and persistent storage.", rel: "Creates &rarr; Pod with ordered names (db-0, db-1). Uses &rarr; PVC per pod." },
+    "Ingress": { desc: "HTTP/HTTPS router. Routes example.com/api to one Service, example.com/blog to another. Needs an Ingress Controller.", rel: "Routes external HTTP &rarr; Services." },
+    "Node": { desc: "A worker machine (VM or physical) that runs pods. Minikube has 1 node. Real clusters have many.", rel: "Runs &rarr; Pods. Managed by &rarr; Kubelet." },
+    "Namespace": { desc: "A virtual cluster inside your cluster. Isolates resources. Default ones: default, kube-system.", rel: "Contains &rarr; almost all objects (except cluster-scoped like Node, PV, ClusterRole)." },
+    "API Server": { desc: "The front door. Every kubectl command talks to this. Validates and processes requests.", rel: "Serves &rarr; All kubectl and internal requests. Stores state in &rarr; etcd." },
+    "etcd": { desc: "The cluster database. Stores ALL cluster state (what pods exist, where they run, configs).", rel: "Backed by &rarr; API Server. Heart of the cluster." },
+    "Scheduler": { desc: "Decides WHICH node a new pod should run on based on resources and rules.", rel: "Reads unscheduled pods from &rarr; API Server. Assigns to &rarr; Node." },
+    "Controller Mgr": { desc: "Watches the cluster and fixes drift. If a Deployment says 3 replicas but only 2 exist, it creates the 3rd.", rel: "Runs controllers for &rarr; Deployment, ReplicaSet, Node, Endpoint, etc." },
+    "Kubelet": { desc: "The node agent. Runs on every node. Talks to API server and starts/stops containers.", rel: "Runs on &rarr; Node. Manages &rarr; Pods via container runtime." },
+    "Kube-proxy": { desc: "Network proxy on every node. Manages iptables rules so Services can route traffic to pods.", rel: "Runs on &rarr; Every node. Implements &rarr; Service networking." },
+    "StorageClass": { desc: "Template for creating PVs dynamically. When someone asks for fast-ssd, create an AWS gp3 volume.", rel: "Referenced by &rarr; PVC. Creates &rarr; PersistentVolume (PV)." },
+    "NetworkPolicy": { desc: "Firewall rules for pods. Only allow frontend pods to talk to backend pods on port 8080.", rel: "Applied to &rarr; Pods by label selector." },
+    "Job": { desc: "Runs a pod to completion (then stops). For one-off tasks like backups or migrations.", rel: "Creates &rarr; Pod. Restarts &rarr; Never (unlike Deployment)." },
+    "CronJob": { desc: "Runs Jobs on a schedule. Like Linux crontab but for containers.", rel: "Creates &rarr; Job &rarr; Pod on schedule." },
+    "ClusterRole": { desc: "Permissions across the ENTIRE cluster. Can list all nodes in any namespace.", rel: "Bound by &rarr; ClusterRoleBinding. Scope: cluster-wide." },
+    "ClusterRoleBinding": { desc: "Like RoleBinding but for ClusterRoles. Cluster-scoped.", rel: "Connects &rarr; ClusterRole + user/ServiceAccount." },
+    "PDB": { desc: "Pod Disruption Budget. Ensure at least 2 pods are always available during node maintenance or upgrades.", rel: "Protects &rarr; Pods of a Deployment/ReplicaSet." },
+    "VPA": { desc: "Vertical Pod Autoscaler. Adjusts CPU/memory LIMITS of existing pods (restarts them).", rel: "Modifies &rarr; Pod resource limits." },
+    "NodeSelector": { desc: "Simple rule: Only run this pod on nodes with label disk=ssd.", rel: "Used by &rarr; Pod spec. Matches &rarr; Node labels." },
+    "Affinity": { desc: "Advanced scheduling. Prefer nodes near the database or Spread pods across zones.", rel: "Used by &rarr; Pod spec. Guides &rarr; Scheduler." },
+    "Taint/Toleration": { desc: "Node says Do not schedule here unless pod tolerates my taint. Used for dedicated nodes.", rel: "Taint on &rarr; Node. Toleration on &rarr; Pod." },
+    "ResourceQuota": { desc: "Namespace limit. This namespace can use max 10 CPUs and 20GB RAM total.", rel: "Applied to &rarr; Namespace. Enforced by &rarr; API Server." },
+    "LimitRange": { desc: "Default resource limits for new pods in a namespace. If no limit specified, default to 512MB RAM.", rel: "Applied to &rarr; Namespace. Affects &rarr; new Pods." },
+    "ReplicationController": { desc: "Older version of ReplicaSet. Rarely used today.", rel: "Superseded by &rarr; ReplicaSet." }
   };
 
   document.querySelectorAll(".k8s-obj").forEach(function(el) {
@@ -234,8 +234,12 @@
       document.querySelectorAll(".k8s-obj").forEach(function(e) { e.classList.remove("active"); });
       this.classList.add("active");
       var name = this.getAttribute("data-obj");
-      var info = objects[name] || { desc: "", rel: "" };
-      panel.innerHTML = "<h3>" + name + "</h3><p>" + info.desc + "</p>" + (info.rel ? "<div class="rel">🔗 " + info.rel + "</div>" : "");
+      var info = objects[name];
+      if (!info) {
+        panel.innerHTML = "<h3>" + name + "</h3><p style="color:#999">No description found for this object.</p>";
+        return;
+      }
+      panel.innerHTML = "<h3>" + name + "</h3><p>" + info.desc + "</p>" + (info.rel ? "<div class="rel">&rarr; " + info.rel + "</div>" : "");
     });
   });
 })();
